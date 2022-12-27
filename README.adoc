@@ -579,6 +579,7 @@ Ces fonctions nous les vérifions après la lecture de chaque enregistrement du 
                 </a></td>
 
             </tr>
+
             <tr th:unless="${client.contrainte.length() != 0}"class="table-light" > <3>
                 <td th:text="${client.getTitle()}">Titre</td>
                 <td th:text="${client.getGivenName()}">Nom</td>
