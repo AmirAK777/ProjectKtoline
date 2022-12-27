@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${title}">Titre du document</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"/>
+
+
+<div class="table-responsive">
+    <table class="table w-auto small">
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Adresse</th>
+            <th>Zip Code</th>
+            <th>Mail</th>
+            <th>Telephone</th>
+            <th>Data de Naissance</th>
+            <th>CC Type</th>
+            <th>CC Number</th>
+            <th>CC Expires</th>
+            <th>CC Vehicule</th>
+            <th>CC FeetInches</th>
+            <th>Centimetre</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Contrainte</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <div class="container">
+            <div th:if="${message}" class="alert alert-danger" role="alert">
+                <span th:text="${message}"></span>
+            </div>
+        </div>
+        <th:block th:each="client: ${listClients}">
+            <tr th:if="${client.contrainte.length() != 0}"
+                th:class="'table-danger'">
+                <td th:text="${client.getTitle()}">Titre</td>
+                <td th:text="${client.getGivenName()}">Nom</td>
+                <td th:text="${client.getSurname()}">Prenom</td>
+                <td th:text="${client.getStreetAddress()}">Adresse</td>
+                <td th:text="${client.getZipCode()}">Zip Code</td>
+                <td th:text="${client.getEmailAddress()}">Mail</td>
+                <td th:text="${client.getTelephoneNumber()}">TelephoneNumber</td>
+                <td th:text="${client.getBirthday()}">Data de Naissance</td>
+                <td th:text="${client.getCcType()}">CC Type</td>
+                <td th:text="${client.getCcNumber()}">CC Number</td>
+                <td th:text="${client.getCcExpires()}">CC Expires</td>
+                <td th:text="${client.getVehicle()}">Vehicle</td>
+                <td th:text="${client.getFeetInches()}">FeetInches</td>
+                <td th:text="${client.getCentimeters()}">Centimeters</td>
+                <td th:text="${client.getLatitude()}">Latitude</td>
+                <td th:text="${client.getLongitude()}">Longitude</td>
+                <td th:text="${client.getContrainte()}">Contrainte</td>
+                <td><a sec:authorize="hasAuthority('ROLE_VIP')" th:href="@{/client/{id}(id=${client.id})}"
+                       class="btn btn-danger"> <i
+                        class="fas fa-user-times ml-2">Supprimer</i>
+                </a></td>
+
+            </tr>
+            <tr th:unless="${client.contrainte.length() != 0}"class="table-light" >
+                <td th:text="${client.getTitle()}">Titre</td>
+                <td th:text="${client.getGivenName()}">Nom</td>
+                <td th:text="${client.getSurname()}">Prenom</td>
+                <td th:text="${client.getStreetAddress()}">Adresse</td>
+                <td th:text="${client.getZipCode()}">Zip Code</td>
+                <td th:text="${client.getEmailAddress()}">Mail</td>
+                <td th:text="${client.getTelephoneNumber()}">TelephoneNumber</td>
+                <td th:text="${client.getBirthday()}">Data de Naissance</td>
+                <td th:text="${client.getCcType()}">CC Type</td>
+                <td th:text="${client.getCcNumber()}">CC Number</td>
+                <td th:text="${client.getCcExpires()}">CC Expires</td>
+                <td th:text="${client.getVehicle()}">Vehicle</td>
+                <td th:text="${client.getFeetInches()}">FeetInches</td>
+                <td th:text="${client.getCentimeters()}">Centimeters</td>
+                <td th:text="${client.getLatitude()}">Latitude</td>
+                <td th:text="${client.getLongitude()}">Longitude</td>
+                <td th:text="${client.getContrainte()}">Contrainte</td>
+                <td><a sec:authorize="hasAuthority('ROLE_VIP')" th:href="@{/client/{id}(id=${client.id})}"
+                       class="btn btn-danger"> <i
+                        class="fas fa-user-times ml-2">Supprimer</i>
+                </a></td>
+            </tr>
+            </th:block>
+        </tbody>
+    </table>
+
+
+</body>
+</html>

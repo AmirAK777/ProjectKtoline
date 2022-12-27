@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${title}">Titre du document</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+<h1 th:text="${title}">Un titre</h1>
+    <hr>
+
+    <div class="articles">
+        <th:block th:each="article : ${articles}">
+        <section>
+            <header class="article-header">
+                <h2 class="article-title" th:text="${article.getTitle()}"></h2>
+                <div class="article-meta">By  <strong th:text="${article.creditedTo.lastname}"></strong>, on <strong> une date </strong></div>
+            </header>
+            <div class="article-description">
+               <p th:text="${article.headline}"></p>
+                <p th:text="${'slug: ' + article.slug}"></p>
+                <a class="btn btn-primary" th:href="@{'article/' +${article.getId()}}">Detail</a>
+
+
+            </div>
+        </section>
+        </th:block>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer:: footer"/>
+
+</body>
+</html>

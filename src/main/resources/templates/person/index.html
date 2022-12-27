@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${title}">Titre du document</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <a  class="btn btn-success" sec:authorize="hasAuthority('ROLE_VIP')"  th:href="@{/addPerson}">Register</a>
+    <h1 th:text="${title}">Un titre</h1>
+    <hr>
+
+    <div class="articles">
+        <th:block th:each="person : ${person}">
+        <section>
+            <header class="person-header">
+                <h2 class="person-title" th:text="${person.getFirstname()}"></h2>
+            </header>
+            <div class="person-description">
+               <p th:text="${person.description}"></p>
+            </div>
+        </section>
+        </th:block>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer:: footer"/>
+
+</body>
+</html>
